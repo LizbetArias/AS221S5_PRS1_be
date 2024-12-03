@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: report
+  r2dbc:
+    url: r2dbc:postgresql://ep-aged-lake-a4wjkmtd-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require
+    username: neondb_owner
+    password: GQaLu2oDSTR6
+    show-sql: true
