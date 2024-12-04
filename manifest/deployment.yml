@@ -1,0 +1,21 @@
+# kubectl apply -f deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prs1
+  namespace: 01-lizbet
+spec:
+  replicas: 1  # Número de réplicas (puedes aumentar si es necesario)
+  selector:
+    matchLabels:
+      app: prs1 
+  template:
+    metadata:
+      labels:
+        app: prs1  
+    spec:
+      containers:
+      - name: prs1  # Nombre del contenedor
+        image: lizbet/prs1backend # Imagen Docker del contenedor
+        ports:
+        - containerPort: 8080  # Puerto en el contenedor donde escucha la aplicación

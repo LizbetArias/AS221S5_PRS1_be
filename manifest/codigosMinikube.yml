@@ -1,0 +1,55 @@
+# ---------------MVN----------------------
+
+# PARA PROBAR EL MVN INSTALAMOS EL SDK DE JAVA.17
+sdk install java 17.0.11-jbr
+
+# INSTALAMOS EL CLEAN-DSKIPTEST Y ACTUALIZAMOS EL TARJET
+mvn clean install -DskipTests
+
+# EJECUTAMOS Y COMPROBAMOS SI FUNCIONA
+mvn spring-boot:run
+
+#----------dockerfiled/Docker-compose---------------
+
+# PRIMERO SE CREA EL DOCKERFILE PARA LA IMAGEN (SE GUARDA EN UN CONTENEDOR DE DOCKERHUB DEL PROYECTO)
+docker built -t lizbet/psr1backend .
+
+# COMPOBAMOS QUE SE HAYA CREADO
+docker-compose up
+
+#CUANDO SE CREO Y ES FUNCIONAL REALIZA EL PUSH
+docker push lizbet/psr1backend
+
+# ----------kubernetes----------------------
+
+
+# CREO EL MANIFEST (LAS CARPETAS)
+-primero | manespace.yml
+-luego | deployment.yml
+-finalmente |  service.yml
+
+# EN ESTE PROYECTO NO HAY SECRET !!!!!
+
+# ME MUEVO A LA CARPETA MANIFEST
+cd manifest/
+
+# consultar versión de minikube
+minikube version
+
+# iniciar clúster kubernetes
+minikube start
+
+# Detener clúster kubernetes
+minikube stop
+
+# Eliminar clúster kubernetes
+minikube delete
+
+# CREAMOS EL DEPLOYMENT
+kubectl apply -f deployment.yml
+
+# CREAMOS EL SERVICE
+kubectl apply -f service.yml
+ 
+# COMPROBAMOS EL FUNCIONAMIENTO 
+kubectl port-forward service/prs1 8080:30001 -n 01-lizbet
